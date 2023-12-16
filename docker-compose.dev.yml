@@ -1,0 +1,43 @@
+version: '3.9'
+services: 
+  frontend:
+    build: frontend
+    ports: 
+      - '3000:3000'
+    volumes: 
+      - ./frontend:/usr/app
+      - /usr/app/build
+      - /usr/app/node_modules
+  image: 
+    build: image
+    ports: 
+      - '4001:4001'
+    volumes: 
+      - ./image:/usr/app
+      - /usr/app/node_modules
+  event-bus: 
+    build: event-bus
+    volumes: 
+      - ./event-bus:/usr/app
+      - /usr/app/node_modules
+  wall_storage: 
+    build: wall_storage
+    ports: 
+      - '4000:4000'
+    volumes: 
+      - ./wall_storage:/usr/app
+      - /usr/app/node_modules
+  query: 
+    build: query
+    ports: 
+      - '4002:4002'
+    volumes: 
+      - ./query:/usr/app
+      - /usr/app/node_modules
+  votes: 
+    build: votes
+    ports: 
+      - '4003:4003'
+    volumes: 
+      - ./votes:/usr/app
+      - /usr/app/node_modules
