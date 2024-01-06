@@ -11,5 +11,5 @@ Currently stores locally in a json file. Will add Database functionality in futu
 ![](https://github.com/natkai2040/art-arranger-app/tree/main/README-graphics/SearchingGateGIF.gif?raw=true)
 Adding an image to a wall, Adjusting its size
 
-![](https://github.com/natkai2040/art-arranger-app/tree/main/README-graphics/ExampleWallGeo.PNG?raw=true)
+![](https://raw.githubusercontent.com/natkai2040/art-arranger-app/main/README-graphics/ExampleWallGeo.PNG)
 Example of a wall
