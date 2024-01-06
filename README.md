@@ -8,8 +8,8 @@ Currently works with chicago institute of art API for images
 Currently stores locally in a json file. Will add Database functionality in future.
 
 # Usage #
-![](https://github.com/natkai2040/art-arranger-app/tree/main/README-graphics/SearchingGateGIF.gif)
+![](https://github.com/natkai2040/art-arranger-app/tree/main/README-graphics/SearchingGateGIF.gif?raw=true)
 Adding an image to a wall, Adjusting its size
 
-![](https://github.com/natkai2040/art-arranger-app/tree/main/README-graphics/ExampleWallGeo.PNG)
+![](https://github.com/natkai2040/art-arranger-app/tree/main/README-graphics/ExampleWallGeo.PNG?raw=true)
 Example of a wall
