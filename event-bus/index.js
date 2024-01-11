@@ -9,8 +9,10 @@ const logname = `(${process.pid}) Event-Bus`
 app.use(logger('dev')); 
 app.use(express.json()); 
 
+// WITH DOCKER {name: 'query', port: 4002}
+// WITH NODE {name: 'localhost', port: 4002}   
 const servicePorts = [
-    {name: 'query', port: 4002}, 
+    {name: 'query', port: 4002} 
     // {name: 'localhost', port: 4002}
 ];
 
