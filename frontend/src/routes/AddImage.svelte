@@ -14,7 +14,7 @@
         searchterm = ""; 
     }
 
-    // Adds 
+    // Adds to the Current Wall Store
     function addImageFromUrl(url) {
         console.log("add image" + (url)) 
         CurrentWallStore.update((_currentWall) => {
@@ -26,10 +26,9 @@
     }
     
 </script>
-
-<div class="border">
+<h2>Add Images to Wall</h2>
+<div>
     <div>
-        <h2>Add Images to Wall</h2>
         <form>
             <input type="string" placeholder="Search for Image: eg. 'cat'" bind:value = {searchterm}/>
             <button on:click={searchForImages}>Search</button>
@@ -62,8 +61,8 @@
         margin: 4px;
     }
     .thumbnail {
-        width: 200px; 
-        height: 200px; 
+        max-width: 180px; 
+        /* height: 200px;  */
     }
     .border {
         border: solid lightskyblue 4px;

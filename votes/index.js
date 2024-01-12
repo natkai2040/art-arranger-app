@@ -25,9 +25,10 @@ app.post('/vote', async (req,res) => {
 
     // Call event-bus with WallVoted event
     try {
-        // WITH DOCKER http://event-bus:4005/events
+        // WITH DOCKER http://event-bus:4005/events 
         // WITH NODE http://localhost:4005/events 
-        await fetch('http://event-bus:4005/events', {
+        // await fetch('http://localhost:4005/events', {
+        await fetch('http://event-bus:4005/events', { 
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'

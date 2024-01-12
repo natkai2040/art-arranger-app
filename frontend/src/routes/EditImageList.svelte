@@ -1,6 +1,7 @@
 <script>
     import { CurrentWallStore } from "./stores.js";
-    let images = [];
+    let images = []; // Array of Images
+
     CurrentWallStore.subscribe((_currentWall) => { 
         if (_currentWall.images != undefined) {
             images = _currentWall.images; 
@@ -12,14 +13,28 @@
     const changeImage = function (event) { 
         event.preventDefault()
         console.log("change image")
+        console.log("updating store")
         CurrentWallStore.update((_currentWall) => { 
             // Change the Images in the store to reflect the next X,Y,H,W
             _currentWall.images = images; 
             return _currentWall; 
         }); 
     }
-</script>
 
+    // deletes image from the store based on imgID
+    const deleteImage = function (imgID) { 
+        console.log("delete image");
+        console.log("updating store")
+        images = images.filter(img => img.id != imgID)
+        CurrentWallStore.update((_currentWall) => { 
+            // Change the Images in the store to reflect the next X,Y,H,W
+            _currentWall.images = images; 
+            return _currentWall; 
+        }); 
+    }
+
+</script>
+    <h2>List of Images</h2>
     <div class="border image_card_container">
         {#each images as img (img.id)}
         <div>
@@ -32,6 +47,8 @@
                     width: <input type="number" bind:value={img.width}>
                 </div>
                 <button on:click={changeImage}>Change Image</button>
+                <button on:click={() => {deleteImage(img.id)}}>Delete Image</button>
+
             </form>
         </div>
         {/each}

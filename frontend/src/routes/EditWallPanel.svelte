@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import AddImage from "./AddImage.svelte";
     import { CurrentWallStore, ModeStore} from "./stores";
-    import CurrentImageList from "./CurrentImageList.svelte";
+    import EditImageList from "./EditImageList.svelte";
     import VoteButtons from "./VoteButtons.svelte";
 
     // Default Value of the Store.
@@ -13,7 +13,7 @@
         // Syncs with the Canvas Element
         CurrentWallStore.subscribe((_currentWall) => {
             currentWall = _currentWall; 
-        }); 
+        });
     });
 
     // Saves the Wall to the Database
@@ -53,28 +53,25 @@
                 votes: 0
             }
         }); 
+        console.log("discardWall: mode set to LIST"); 
         ModeStore.update((mode) => { 
-            return "view"; 
+            return "list"; 
         })
     }
 
 </script>
 <div class="container">
-    <h1>{currentWall.name}</h1>
-    <div class="border">
-        {currentWall.description}
-    </div>
-    {#if currentWall.id != undefined}
-        <VoteButtons wallid={currentWall.id}/>
-    {/if}
+    <h1>Edit: {currentWall.name}</h1>
+    Wall Name:
+    <input type="text" placeholder="Wall Name" bind:value={currentWall.name}/>
     <form>
-        <input type="text" placeholder="Wall Name" bind:value={currentWall.name}/>
-        <input type="text" placeholder="Wall Description" bind:value={currentWall.description}/>
-        <CurrentImageList/>
+        <div>Wall Description:</div>
+        <textarea rows="5" cols="80" type="text" placeholder="Wall Description" bind:value={currentWall.description}/>
+        <EditImageList/>
         <AddImage/>
-        <button class="btn btn-primary" on:click={savewall}>Save Wall</button>
-        <button class="btn btn-light" on:click={discardWall}>Discard Changes</button>
     </form>
+    <button class="btn btn-primary" on:click={savewall}>Save Wall</button>
+    <button class="btn btn-light" on:click={discardWall}>Discard Changes</button>
 </div>
 
 <style> 

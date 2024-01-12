@@ -1,7 +1,11 @@
 <script>
     import { onMount } from "svelte";
     import {CurrentWallStore} from './stores.js'
+    import {ModeStore} from './stores.js'
+
     let currentWall; 
+    let mode; // disallow dragging when mode is view or list
+
     const shadowColor = '#707070'; 
     const backgroundColor = '#B3AA89';
     const backgroundImages = [
@@ -50,15 +54,22 @@
         console.log("End DrawShape()")
     }
 
+    // Listen to changes in the CurrentWallStore
     CurrentWallStore.subscribe((_currentWall) => {
-        console.log("Subscribed");
         currentWall = _currentWall;
         images = currentWall.images; 
         console.log("WallStore: " + JSON.stringify(currentWall)); 
         console.log("WallStore Canvas:  " + canvas); 
-        if (canvas != undefined) { // Sometimes Store Occurs First, Sometimes onMount
+         // Sometimes Store Runs First, Sometimes onMount
+        if (canvas != undefined) {
             draw_shapes(); 
         }
+    }); 
+
+
+    // subscribe to mode store
+    ModeStore.subscribe((_mode) => {
+        mode = _mode;
     }); 
     
     // Triggered When Done Dragging Image // 
@@ -136,19 +147,22 @@
 
         function mouse_down(event) { 
             event.preventDefault(); //default action that belongs to the event will not occur
-            startX = parseInt(event.clientX - offset_x); 
-            startY = parseInt(event.clientY - offset_y);
-            let index = 0; 
-            // Makes Current Shape Index Equal to One Shape
-            for (let shape of images) {
-                if (is_mouse_in_shape(startX,startY,shape)){
-                    current_shape_index = index; 
-                    is_dragging = true;
-                    return; 
-                }
-                else {
-                }
-                index++; 
+            // prevent begin drag event when mode isn't "edit"
+            if (mode == "edit"){
+                startX = parseInt(event.clientX - offset_x); 
+                startY = parseInt(event.clientY - offset_y);
+                let index = 0; 
+                // Makes Current Shape Index Equal to One Shape
+                for (let shape of images) {
+                    if (is_mouse_in_shape(startX,startY,shape)){
+                        current_shape_index = index; 
+                        is_dragging = true;
+                        return; 
+                    }
+                    else {
+                    }
+                    index++; 
+                }  
             }
         }
 

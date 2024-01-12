@@ -23,6 +23,22 @@
     }); 
 
     // When a wall is clicked to be viewed/edited
+    const edit_wall = function (wall) {
+        // Refresh Top Walls, Because the Current Wall is still in the store.
+        refreshTopwalls(); 
+        console.log("Edit_wall(): " + wall.name); 
+        // Make Wall the current Wall
+        CurrentWallStore.update((_currentwall) => {
+            return wall; 
+        }); 
+        // Change to Edit Mode
+        console.log("Edit_wall: mode set to EDIT"); 
+        ModeStore.update((mode) => {
+            return "edit"; 
+        }); 
+    }
+
+    // When a wall is clicked to be viewed/edited
     const view_wall = function (wall) {
         // Refresh Top Walls, Because the Current Wall is still in the store.
         refreshTopwalls(); 
@@ -32,10 +48,12 @@
             return wall; 
         }); 
         // Change to Edit Mode
+        console.log("view_wall: mode set to VIEW"); 
         ModeStore.update((mode) => {
-            return "edit"; 
+            return "view"; 
         }); 
     }
+
 </script>
 
 <div class="border">
@@ -48,6 +66,7 @@
                 </div>
                 <div>
                     <button on:click={() => {view_wall(wall)}}>View Wall</button>
+                    <button on:click={() => {edit_wall(wall)}}>Edit Wall</button>
                 </div>
             </li>
         {/each}
